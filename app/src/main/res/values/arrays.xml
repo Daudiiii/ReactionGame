@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gender">
+        <item>--Zvolte pohlavie--</item>
+        <item>Muz</item>
+        <item>Zena</item>
+    </string-array>
+    <string-array name="age">
+        <item>--Zvolte vekovu kategoriu--</item>
+        <item>10–15</item>
+        <item>15–20</item>
+        <item>20–25</item>
+        <item>25–30</item>
+        <item>30–35</item>
+        <item>35–40</item>
+        <item>40–45</item>
+        <item>45–50</item>
+    </string-array>
+    <string-array name="glasses">
+        <item>--Mate okuliare ?--</item>
+        <item>Mam okuliare</item>
+        <item>Nemam okuliare</item>
+    </string-array>
+</resources>
