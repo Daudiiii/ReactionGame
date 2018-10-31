@@ -42,21 +42,11 @@ public class MainActivity extends AppCompatActivity {
         stats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                saveToCsv();
-//                Toast.makeText(getApplicationContext(),"pes", Toast.LENGTH_LONG).show();
-//                txt.setText(list.get(list.size()-1).getNick());
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                 startActivity(intent);
             }
         });
-//        List<Player> output = null;
-//        try {
-//            output = dbGetData.execute().get();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,40 +64,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-//    public void saveToCsv(){
-//        String baseDir = android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
-//        String fileName = "data.csv";
-//        String filePath = baseDir + File.separator + fileName;
-//
-//        File f = new File(filePath);
-//        CSVWriter writer = null;
-//        FileWriter mFileWriter = null;
-//        // File exist
-//        if(f.exists() && !f.isDirectory()){
-//            try {
-//                mFileWriter = new FileWriter(filePath , true);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            writer = new CSVWriter(mFileWriter);
-//        }
-//        else {
-//            try {
-//                writer = new CSVWriter(new FileWriter(filePath));
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        String[] data = {"Ship Name","Scientist Name", "..."};
-//
-//        writer.writeNext(data);
-//
-//        try {
-//            writer.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
 }
