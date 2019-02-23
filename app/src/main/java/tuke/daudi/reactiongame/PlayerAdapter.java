@@ -1,6 +1,7 @@
 package tuke.daudi.reactiongame;
 
 import android.content.Context;
+import android.service.autofill.CharSequenceTransformation;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,12 +36,10 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull PlayerHolder playerHolder, int i) {
-
+        playerHolder.rank.setText(String.valueOf(i+1));
         playerHolder.nick.setText(_data.get(i).getNick());
         playerHolder.psc.setText(_data.get(i).getPsc());
-        playerHolder.age.setText(_data.get(i).getAge());
-        playerHolder.gender.setText(_data.get(i).getGender());
-        playerHolder.glasses.setText(_data.get(i).getGlasses());
+        playerHolder.score.setText(String.valueOf(_data.get(i).getScore()));
     }
 
     @Override

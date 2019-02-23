@@ -1,74 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
     <TextView
         android:id="@+id/a2_tv_nick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="94dp"
+        android:layout_height="25dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="2dp"
         android:text="TextView"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/a2_tv_gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:id="@+id/a2_tv_psc"
+        android:layout_width="98dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="28dp"
         android:text="TextView"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/a2_tv_nick"
         app:layout_constraintStart_toEndOf="@+id/a2_tv_nick"
-        app:layout_constraintTop_toTopOf="@+id/a2_tv_nick" />
+        app:layout_constraintTop_toTopOf="@+id/a2_tv_nick"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/a2_tv_age"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:id="@+id/a2_tv_score"
+        android:layout_width="98dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="28dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/a2_tv_gender"
-        app:layout_constraintStart_toEndOf="@+id/a2_tv_gender"
-        app:layout_constraintTop_toTopOf="@+id/a2_tv_gender" />
-
-    <TextView
-        android:id="@+id/a2_tv_psc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/a2_tv_age"
-        app:layout_constraintStart_toEndOf="@+id/a2_tv_age"
-        app:layout_constraintTop_toTopOf="@+id/a2_tv_age"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/a2_tv_glasses"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="32dp"
-        android:text="TextView"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/a2_tv_psc"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/a2_tv_psc"
-        app:layout_constraintTop_toTopOf="@+id/a2_tv_psc" />
+        app:layout_constraintTop_toTopOf="@+id/a2_tv_psc"
+        app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="2dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/darker_gray"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/a2_tv_nick"
-        app:layout_constraintVertical_bias="0.007"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/a2_tv_nick"></LinearLayout>
+
+    <TextView
+        android:id="@+id/a2_tv_rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="R"
+        app:layout_constraintBottom_toBottomOf="@+id/a2_tv_nick"
+        app:layout_constraintEnd_toStartOf="@+id/a2_tv_nick"
+        app:layout_constraintTop_toTopOf="@+id/a2_tv_nick" />
 
 </android.support.constraint.ConstraintLayout>

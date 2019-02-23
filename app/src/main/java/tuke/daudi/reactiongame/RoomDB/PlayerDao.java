@@ -9,11 +9,8 @@ import java.util.List;
 
 @Dao
 public interface PlayerDao {
-    @Query("SELECT * FROM Player")
+    @Query("SELECT * FROM Player order by score")
     List<Player> getAll();
-
-    @Query("SELECT * FROM Player WHERE Id LIKE :Id")
-    Player getById(int Id);
 
     @Insert
     void insertPlayers(Player... players);
@@ -21,5 +18,13 @@ public interface PlayerDao {
     @Delete
     void deletePlayers(Player player);
 
+    @Query("SELECT * FROM Player WHERE psc = :psc order by score")
+    List<Player> searchByPsc(String psc);
+
+    @Query("select * from Player where nick = :nick order by score")
+    List<Player> searchByNick(String nick);
+
+    @Query("select * from Player where nick = :nick and psc = :psc order by score")
+    List<Player> searchByNickAndPsc(String nick, String psc);
 
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:colorPrimary">@color/primary0</item>
+        <item name="android:colorPrimaryDark">@color/primary1</item>
+        <item name="android:colorAccent">@color/primary2</item>
+        <item name="android:colorBackground">@color/primary3</item>
+        <item name="android:colorForeground">@color/colorPrimaryDark</item>
+        <item name="android:statusBarColor">@color/primary3</item>
+        <item name="android:navigationBarColor">@color/primary3</item>
+        <item name="colorAccent">@color/primary1</item>
+        <item name="android:textColorPrimary">@color/colorAccent</item>
+        <item name="android:textColorSecondary">@color/colorAccent</item>
+    </style>
+</resources>

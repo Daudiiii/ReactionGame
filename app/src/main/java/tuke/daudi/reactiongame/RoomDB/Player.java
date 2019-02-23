@@ -3,20 +3,22 @@ package tuke.daudi.reactiongame.RoomDB;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity
 public class Player {
-
+    @Ignore
     public Player() {
     }
-
-    public Player(String psc, String nick, String age, String gender, String glasses) {
+    //nick, age, psc, gender, glasses, score
+    public Player(String nick, String age, String psc, String gender, String glasses, String score) {
         this.psc = psc;
         this.nick = nick;
         this.age = age;
         this.gender = gender;
         this.glasses = glasses;
+        this.score = score;
     }
 
     @PrimaryKey(autoGenerate = true)
@@ -31,8 +33,16 @@ public class Player {
     private String gender;
     @ColumnInfo(name="glasses")
     private String glasses;
+    @ColumnInfo(name="score")
+    private String score;
 
+    public String getScore() {
+        return score;
+    }
 
+    public void setScore(String score) {
+        this.score = score;
+    }
 
     public int getId() {
         return id;

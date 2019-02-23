@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="gender">
-        <item>--Zvolte pohlavie--</item>
         <item>Muz</item>
         <item>Zena</item>
     </string-array>
     <string-array name="age">
-        <item>--Zvolte vekovu kategoriu--</item>
         <item>10–15</item>
         <item>15–20</item>
         <item>20–25</item>
@@ -17,8 +15,17 @@
         <item>45–50</item>
     </string-array>
     <string-array name="glasses">
-        <item>--Mate okuliare ?--</item>
         <item>Mam okuliare</item>
         <item>Nemam okuliare</item>
+    </string-array>
+
+    <string-array name="edu">
+        <item>0 - nič</item>
+        <item>1 - ZŠ</item>
+        <item>2 - SŠ</item>
+        <item>3 - Bc</item>
+        <item>4 - Ing</item>
+        <item>5 - Phd</item>
+        <item>6 - Doc/Prof</item>
     </string-array>
 </resources>

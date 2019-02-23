@@ -2,108 +2,83 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
     android:clickable="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:id="@+id/main_activity">
+    android:orientation="horizontal"
+    tools:context=".MainActivity">
 
     <EditText
         android:id="@+id/et_nick"
         android:layout_width="290dp"
         android:layout_height="40dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789"
         android:ems="10"
         android:hint="Nickname"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.328" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
     <Spinner
         android:id="@+id/spinner_gender"
         android:layout_width="290dp"
         android:layout_height="40dp"
-        android:layout_marginStart="72dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="331dp"
         android:entries="@array/gender"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_nick"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="@+id/et_nick"
+        app:layout_constraintStart_toStartOf="@+id/et_nick"
+        app:layout_constraintTop_toBottomOf="@+id/et_nick" />
 
-    <Spinner
-        android:id="@+id/spinner_age"
+    <EditText
+        android:id="@+id/et_age"
         android:layout_width="290dp"
         android:layout_height="40dp"
-        android:layout_marginStart="72dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="253dp"
-        android:entries="@array/age"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_gender"
-        app:layout_constraintVertical_bias="0.0" />
+        android:inputType="numberDecimal"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_gender"
+        app:layout_constraintStart_toStartOf="@+id/spinner_gender"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_gender" />
 
     <EditText
         android:id="@+id/et_psc"
-        android:layout_width="243dp"
+        android:layout_width="247dp"
         android:layout_height="40dp"
-        android:layout_marginStart="72dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginBottom="202dp"
+        android:layout_marginEnd="41dp"
         android:ems="10"
         android:hint="PSC"
-        android:inputType="phone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_age"
-        app:layout_constraintVertical_bias="0.0"
-        />
+        android:inputType="textPostalAddress"
+        app:layout_constraintEnd_toEndOf="@+id/et_age"
+        app:layout_constraintStart_toStartOf="@+id/et_age"
+        app:layout_constraintTop_toBottomOf="@+id/et_age" />
 
     <Spinner
         android:id="@+id/spinner_glasses"
         android:layout_width="290dp"
         android:layout_height="40dp"
-        android:layout_marginStart="72dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="154dp"
         android:entries="@array/glasses"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/et_psc"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_psc"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="@+id/et_psc"
+        app:layout_constraintTop_toBottomOf="@+id/et_psc" />
 
     <ImageView
         android:id="@+id/icon_nick"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/et_nick"
         app:layout_constraintEnd_toStartOf="@+id/et_nick"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/et_nick"
         app:layout_constraintVertical_bias="0.0"
@@ -113,124 +88,145 @@
         android:id="@+id/icon_gender"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner_gender"
-        app:layout_constraintEnd_toStartOf="@+id/spinner_gender"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/spinner_gender"
-        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/icon_nick"
+        app:layout_constraintStart_toStartOf="@+id/icon_nick"
+        app:layout_constraintTop_toBottomOf="@+id/icon_nick"
         app:srcCompat="@drawable/ic_wc" />
 
     <ImageView
         android:id="@+id/icon_age"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner_age"
-        app:layout_constraintEnd_toStartOf="@+id/spinner_age"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/spinner_age"
-        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/icon_gender"
+        app:layout_constraintStart_toStartOf="@+id/icon_gender"
+        app:layout_constraintTop_toBottomOf="@+id/icon_gender"
         app:srcCompat="@drawable/ic_cake" />
 
     <ImageView
         android:id="@+id/icon_psc"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/et_psc"
-        app:layout_constraintEnd_toStartOf="@+id/et_psc"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/et_psc"
-        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/icon_age"
+        app:layout_constraintStart_toStartOf="@+id/icon_age"
+        app:layout_constraintTop_toBottomOf="@+id/icon_age"
         app:srcCompat="@drawable/ic_add_location" />
 
     <ImageView
         android:id="@+id/icon_gps_untracked"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="6dp"
         app:layout_constraintBottom_toBottomOf="@+id/et_psc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/et_psc"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_age"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toTopOf="@+id/et_psc"
         app:srcCompat="@drawable/ic_gps_not_fixed" />
 
     <ImageView
         android:id="@+id/icon_glasses"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner_glasses"
-        app:layout_constraintEnd_toStartOf="@+id/spinner_glasses"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/spinner_glasses"
-        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/icon_psc"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/icon_psc"
+        app:layout_constraintTop_toBottomOf="@+id/icon_psc"
         app:srcCompat="@drawable/ic_glasses" />
 
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="274dp"
-        android:layout_height="183dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="142dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/et_nick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/logo1" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/ibtn_highscores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="96dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ibtn_start"
-        app:layout_constraintEnd_toStartOf="@+id/ibtn_start"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ibtn_start"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_edu"
         app:srcCompat="@drawable/ic_bar_chart" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/ibtn_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="41dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="72dp"
+        android:layout_marginEnd="109dp"
+        android:layout_marginBottom="8dp"
+        android:adjustViewBounds="false"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_glasses"
+        app:layout_constraintStart_toEndOf="@+id/ibtn_highscores"
+        app:layout_constraintTop_toTopOf="@+id/ibtn_highscores"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_play_arrow" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="95dp"
-        android:layout_marginEnd="19dp"
-        android:layout_marginBottom="29dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ibtn_start"
-        app:layout_constraintStart_toEndOf="@+id/ibtn_highscores"
+        android:layout_marginTop="8dp"
+        android:text="Highscores"
+        app:layout_constraintEnd_toEndOf="@+id/ibtn_highscores"
+        app:layout_constraintStart_toStartOf="@+id/ibtn_highscores"
+        app:layout_constraintTop_toBottomOf="@+id/ibtn_highscores" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Play"
+        app:layout_constraintEnd_toEndOf="@+id/ibtn_start"
+        app:layout_constraintHorizontal_bias="0.363"
+        app:layout_constraintStart_toStartOf="@+id/ibtn_start"
+        app:layout_constraintTop_toBottomOf="@+id/ibtn_start" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/icon_glasses"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/icon_glasses"
+        app:srcCompat="@drawable/ic_hat" />
+
+    <Spinner
+        android:id="@+id/spinner_edu"
+        android:layout_width="290dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:entries="@array/edu"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_glasses"
+        app:layout_constraintStart_toStartOf="@+id/spinner_glasses"
         app:layout_constraintTop_toBottomOf="@+id/spinner_glasses" />
 
 </android.support.constraint.ConstraintLayout>

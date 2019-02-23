@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EndGameActivity">
+
+    <TextView
+        android:id="@+id/tv_endgame_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="16dp"
+        android:text="Koniec hry"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="76sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_endgame_average"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Priemerna reakcna doba"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_endgame_end"
+        app:layout_constraintStart_toStartOf="@+id/tv_endgame_end"
+        app:layout_constraintTop_toBottomOf="@+id/tv_endgame_end" />
+
+    <TextView
+        android:id="@+id/tv_endgame_result"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_endgame_average"
+        app:layout_constraintStart_toStartOf="@+id/tv_endgame_average"
+        app:layout_constraintTop_toBottomOf="@+id/tv_endgame_average" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="141dp"
+        android:layout_height="112dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tv_endgame_result"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="@+id/tv_endgame_result"
+        app:layout_constraintTop_toBottomOf="@+id/tv_endgame_result"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_medal_of_circular_shape_with_a_star_hanging_of_a_ribbon" />
+
+    <Button
+        android:id="@+id/btn_endgame_highscores"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="82dp"
+        android:layout_marginBottom="74dp"
+        android:background="@drawable/ic_bar_chart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <Button
+        android:id="@+id/btn_endgame_home"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="101dp"
+        android:layout_marginEnd="75dp"
+        android:background="@drawable/ic_home"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_endgame_highscores"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_endgame_highscores"
+        app:layout_constraintTop_toTopOf="@+id/btn_endgame_highscores" />
+</android.support.constraint.ConstraintLayout>
