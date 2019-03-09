@@ -1,48 +1,34 @@
 package tuke.daudi.reactiongame;
 
-import android.Manifest;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
+import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.lang.ref.WeakReference;
-import java.util.List;
-
-import tuke.daudi.reactiongame.RoomDB.Player;
 
 import static tuke.daudi.reactiongame.App.CHANNEL_1_ID;
-import static tuke.daudi.reactiongame.App.CHANNEL_2_ID;
 
 public class EndGameActivity extends AppCompatActivity implements ObviousSetup{
     private TextView tv_score;
     private Button scores, home;
-    private final int PERMISSION_ID_ACCESS_STORAGE = 1000;
-    private List<String> list;
     private NotificationManagerCompat notificationManager;
     private String nick, score;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_game);
-        if(ActivityCompat.checkSelfPermission(EndGameActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(EndGameActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},PERMISSION_ID_ACCESS_STORAGE);
-        }
+        Intent i = getIntent();
         loadAll();
-        addToDatabase();
-
-
-
+        nick = i.getStringExtra("nick");
+        score = i.getStringExtra("score");
+        Log.i("MyLog",score + "");
+        tv_score.setText(score);
+        sendOnChannel1();
     }
 
     @Override
@@ -50,20 +36,6 @@ public class EndGameActivity extends AppCompatActivity implements ObviousSetup{
         setViews();
         setDeclarations();
         setOnClickListeners();
-    }
-
-    public void addToDatabase(){
-        DbGetData dbGetData = new DbGetData(new WeakReference<>(getApplicationContext()));
-        Intent i = getIntent();
-        list = i.getStringArrayListExtra("userArr");
-//        Double score = Objects.requireNonNull(i.getExtras()).getDouble("score");
-        //nick, age, psc, gender, glasses, score
-        final Player player = new Player(list.get(0), list.get(1), list.get(2), list.get(3), list.get(4),list.get(5));
-        dbGetData.execute(player);
-        tv_score.setText(list.get(5));
-        nick = list.get(0);
-        score = list.get(5);
-        sendOnChannel1();
     }
 
     public void setViews(){
@@ -91,27 +63,6 @@ public class EndGameActivity extends AppCompatActivity implements ObviousSetup{
     @Override
     public void setDeclarations() {
         notificationManager = NotificationManagerCompat.from(this);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch(requestCode){
-            case PERMISSION_ID_ACCESS_STORAGE:{
-                for(int i = 0;i < permissions.length;i++){
-                    if(permissions[i].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)){
-                        if(grantResults[i] == PackageManager.PERMISSION_GRANTED){
-                            Toast.makeText(this,"Writing to file ...",Toast.LENGTH_LONG).show();
-                        }
-                        else{
-                            //In real cases, this string should not be hardcoded and would be places inside the values/strings.xml file
-                            Toast.makeText(this,"Unable to get permissions, have to quit.",Toast.LENGTH_LONG).show();
-                            finish();
-                        }
-                    }
-                }
-            }
-        }
     }
 
     public void sendOnChannel1(){

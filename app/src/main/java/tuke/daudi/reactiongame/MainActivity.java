@@ -11,19 +11,20 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import tuke.daudi.reactiongame.Location.AppLocationService;
 import tuke.daudi.reactiongame.Location.LocationAddress;
@@ -33,7 +34,9 @@ public class MainActivity extends AppCompatActivity  implements ObviousSetup{
     private ImageView start, stats, btnShowAddress;
     private Location location;
     private AppLocationService appLocationService;
-
+    private BroadcastNetwork broadcastNetwork;
+    private IntentFilter intentFilter;
+    private DatabaseReference databaseReference0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +58,9 @@ public class MainActivity extends AppCompatActivity  implements ObviousSetup{
     }
 
     public void setDeclarations(){
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},PERMISSION_LOCATION_ID);
-            return;
-        }
         appLocationService = new AppLocationService(this);
         location = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
+        databaseReference0 = FirebaseDatabase.getInstance().getReference().child("players");
     }
 
     public void setOnClickListeners(){
@@ -79,18 +79,42 @@ public class MainActivity extends AppCompatActivity  implements ObviousSetup{
         });
         /* Start Button*/
         start.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, GameActivity.class);
-            ArrayList<String> s = new ArrayList<>();
-            //nick, age, psc, gender, glasses, score
-            s.add(((EditText) findViewById(R.id.et_nick)).getText().toString());
-            s.add(((EditText) findViewById(R.id.et_age)).getText().toString());
-            s.add(((EditText) findViewById(R.id.et_psc)).getText().toString());
-            s.add(((Spinner) findViewById(R.id.spinner_gender)).getSelectedItem().toString());
-            s.add(((Spinner) findViewById(R.id.spinner_glasses)).getSelectedItem().toString());
-            intent.putStringArrayListExtra("userArr",s);
-            startActivity(intent);
-            finish();
+            if (!((EditText) findViewById(R.id.et_nick)).getText().toString().isEmpty() && !((EditText) findViewById(R.id.et_age)).getText().toString().isEmpty() && !((EditText) findViewById(R.id.et_psc)).getText().toString().isEmpty()){
+                String child = ((EditText) findViewById(R.id.et_nick)).getText().toString();
+                DatabaseReference databaseReference = databaseReference0.child(child);
+                databaseReference.child("nick").setValue(child);
+                databaseReference.child("age").setValue(((EditText) findViewById(R.id.et_age)).getText().toString());
+                databaseReference.child("psc").setValue(((EditText) findViewById(R.id.et_psc)).getText().toString());
+                databaseReference.child("gender").setValue(((Spinner) findViewById(R.id.spinner_gender)).getSelectedItem().toString());
+                databaseReference.child("glasses").setValue(((Spinner) findViewById(R.id.spinner_glasses)).getSelectedItem().toString());
+                databaseReference.child("education").setValue(((Spinner) findViewById(R.id.spinner_edu)).getSelectedItem().toString());
+
+                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                intent.putExtra("child",child);
+
+//                ArrayList<String> s = new ArrayList<>();
+                //nick, age, psc, gender, glasses, score, edu
+//                s.add(((EditText) findViewById(R.id.et_nick)).getText().toString());
+//                s.add(((EditText) findViewById(R.id.et_age)).getText().toString());
+//                s.add(((EditText) findViewById(R.id.et_psc)).getText().toString());
+//                s.add(((Spinner) findViewById(R.id.spinner_gender)).getSelectedItem().toString());
+//                s.add(((Spinner) findViewById(R.id.spinner_glasses)).getSelectedItem().toString());
+//                s.add(((Spinner) findViewById(R.id.spinner_edu)).getSelectedItem().toString());
+//                intent.putStringArrayListExtra("userArr",s);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(this, "Vyplni vsetky polozky", Toast.LENGTH_SHORT).show();
+            }
+
         });
+        findViewById(R.id.logo_main).setOnClickListener(v -> fillInputs());
+    }
+
+    public void fillInputs(){
+        ((EditText) findViewById(R.id.et_nick)).setText("Test");
+        ((EditText) findViewById(R.id.et_age)).setText("54");
+        ((EditText) findViewById(R.id.et_psc)).setText("076 62");
     }
 
     private class GeocoderHandler extends Handler {
@@ -138,6 +162,12 @@ public class MainActivity extends AppCompatActivity  implements ObviousSetup{
         public void onReceive(Context context, Intent intent) {
             ConnectivityManager cm = ((ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE));
             NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+
+            if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},PERMISSION_LOCATION_ID);
+                return;
+            }
+
             if(networkInfo != null && networkInfo.isConnected()){
                 btnShowAddress.setImageResource(R.drawable.ic_gps_fixed);
                 location = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
@@ -154,17 +184,32 @@ public class MainActivity extends AppCompatActivity  implements ObviousSetup{
                 btnShowAddress.setOnClickListener(v -> {
                     Toast.makeText(MainActivity.this, "Need Internet connection to fill PSC", Toast.LENGTH_LONG).show();
                 });
+                location = null;
             }
         }
     }
 
     public void setupBroadcast(){
-        BroadcastNetwork broadcastNetwork = new BroadcastNetwork();
-        IntentFilter intentFilter = new IntentFilter();
+
+        broadcastNetwork = new BroadcastNetwork();
+        intentFilter = new IntentFilter();
         intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
         intentFilter.addAction("android.net.wifi.WIFI_STATE_CHANGED");
         registerReceiver(broadcastNetwork,intentFilter);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(broadcastNetwork);
+        location = null;
+        appLocationService = null;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+    }
 }
 

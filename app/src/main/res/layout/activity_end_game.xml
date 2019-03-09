@@ -13,7 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="16dp"
-        android:text="Koniec hry"
+        android:text="The End"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
         android:textSize="76sp"
@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Priemerna reakcna doba"
+        android:text="Priemerná reakčná doba"
         android:textColor="@color/colorAccent"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_endgame_end"
@@ -37,10 +37,11 @@
     <TextView
         android:id="@+id/tv_endgame_result"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:fontFamily="monospace"
         android:textColor="@color/colorAccent"
-        android:textSize="18sp"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_endgame_average"
         app:layout_constraintStart_toStartOf="@+id/tv_endgame_average"
         app:layout_constraintTop_toBottomOf="@+id/tv_endgame_average" />
@@ -81,4 +82,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_endgame_highscores"
         app:layout_constraintTop_toTopOf="@+id/btn_endgame_highscores" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Highscores"
+        app:layout_constraintEnd_toEndOf="@+id/btn_endgame_highscores"
+        app:layout_constraintStart_toStartOf="@+id/btn_endgame_highscores"
+        app:layout_constraintTop_toBottomOf="@+id/btn_endgame_highscores" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        app:layout_constraintEnd_toEndOf="@+id/btn_endgame_home"
+        app:layout_constraintStart_toStartOf="@+id/btn_endgame_home"
+        app:layout_constraintTop_toBottomOf="@+id/btn_endgame_home" />
 </android.support.constraint.ConstraintLayout>

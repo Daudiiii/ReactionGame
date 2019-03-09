@@ -20,12 +20,12 @@
     </string-array>
 
     <string-array name="edu">
-        <item>0 - nič</item>
-        <item>1 - ZŠ</item>
-        <item>2 - SŠ</item>
-        <item>3 - Bc</item>
-        <item>4 - Ing</item>
-        <item>5 - Phd</item>
-        <item>6 - Doc/Prof</item>
+        <item>nič</item>
+        <item>ZS</item>
+        <item>SS</item>
+        <item>Bc</item>
+        <item>Ing</item>
+        <item>Phd</item>
+        <item>Doc/Prof</item>
     </string-array>
 </resources>
