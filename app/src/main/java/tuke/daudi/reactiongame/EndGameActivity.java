@@ -79,16 +79,4 @@ public class EndGameActivity extends AppCompatActivity implements ObviousSetup{
                 .build();
         notificationManager.notify(1, notification);
     }
-//
-//    public void sendOnChannel2(){
-//        Notification notification = new NotificationCompat.Builder(this,CHANNEL_2_ID)
-//                .setSmallIcon(R.drawable.ic_notification_app)
-//                .setContentTitle("Posledná hra")
-//                .setContentText("Hráč " + nick + " dosiahol score: " + score + "\n Chceš ho prekonať ?")
-//                .setPriority(NotificationCompat.PRIORITY_LOW)
-//                .build();
-//        notificationManager.notify(2, notification);
-//    }
-
-
 }

@@ -91,16 +91,6 @@ public class MainActivity extends AppCompatActivity  implements ObviousSetup{
 
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 intent.putExtra("child",child);
-
-//                ArrayList<String> s = new ArrayList<>();
-                //nick, age, psc, gender, glasses, score, edu
-//                s.add(((EditText) findViewById(R.id.et_nick)).getText().toString());
-//                s.add(((EditText) findViewById(R.id.et_age)).getText().toString());
-//                s.add(((EditText) findViewById(R.id.et_psc)).getText().toString());
-//                s.add(((Spinner) findViewById(R.id.spinner_gender)).getSelectedItem().toString());
-//                s.add(((Spinner) findViewById(R.id.spinner_glasses)).getSelectedItem().toString());
-//                s.add(((Spinner) findViewById(R.id.spinner_edu)).getSelectedItem().toString());
-//                intent.putStringArrayListExtra("userArr",s);
                 startActivity(intent);
                 finish();
             } else {
@@ -155,6 +145,7 @@ public class MainActivity extends AppCompatActivity  implements ObviousSetup{
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        unregisterReceiver(broadcastNetwork);
     }
 
     class BroadcastNetwork extends BroadcastReceiver{
