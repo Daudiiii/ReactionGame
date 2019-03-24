@@ -41,6 +41,10 @@ public class MainActivity extends AppCompatActivity  implements ObviousSetup{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},PERMISSION_LOCATION_ID);
+            return;
+        }
         loadAll();
     }
 
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity  implements ObviousSetup{
         setDeclarations();
         setOnClickListeners();
         setupBroadcast();
+
     }
 
     public void setViews(){
@@ -98,7 +103,7 @@ public class MainActivity extends AppCompatActivity  implements ObviousSetup{
             }
 
         });
-        findViewById(R.id.logo_main).setOnClickListener(v -> fillInputs());
+//        findViewById(R.id.logo_main).setOnClickListener(v -> fillInputs());
     }
 
     public void fillInputs(){
@@ -142,22 +147,13 @@ public class MainActivity extends AppCompatActivity  implements ObviousSetup{
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(broadcastNetwork);
-    }
-
     class BroadcastNetwork extends BroadcastReceiver{
         @Override
         public void onReceive(Context context, Intent intent) {
             ConnectivityManager cm = ((ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE));
             NetworkInfo networkInfo = cm.getActiveNetworkInfo();
 
-            if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},PERMISSION_LOCATION_ID);
-                return;
-            }
+
 
             if(networkInfo != null && networkInfo.isConnected()){
                 btnShowAddress.setImageResource(R.drawable.ic_gps_fixed);
@@ -181,26 +177,11 @@ public class MainActivity extends AppCompatActivity  implements ObviousSetup{
     }
 
     public void setupBroadcast(){
-
         broadcastNetwork = new BroadcastNetwork();
         intentFilter = new IntentFilter();
         intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
         intentFilter.addAction("android.net.wifi.WIFI_STATE_CHANGED");
         registerReceiver(broadcastNetwork,intentFilter);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        unregisterReceiver(broadcastNetwork);
-        location = null;
-        appLocationService = null;
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
     }
 }
 

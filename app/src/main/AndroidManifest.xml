@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
     <application
         android:name=".App"
@@ -18,33 +18,41 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyTheme">
-
-        <!-- android:theme="@style/Theme.AppCompat.NoActionBar"> -->
-
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/MyTheme"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait">
+        <activity android:name=".InformativeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- android:theme="@style/Theme.AppCompat.NoActionBar"> -->
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan">
 
+        </activity>
         <activity
             android:name=".HighscoresActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/MyTheme"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".GameActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".EndGameActivity" android:theme="@style/MyTheme" android:screenOrientation="portrait"></activity>
-        <service android:name=".ShakeSensor.ShakeService"></service>
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".GameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EndGameActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyTheme" />
+
+        <service android:name=".ShakeSensor.ShakeService" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
     </application>
 
 </manifest>

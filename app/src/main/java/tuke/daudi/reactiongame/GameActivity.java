@@ -1,5 +1,6 @@
 package tuke.daudi.reactiongame;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Build;
@@ -30,20 +31,28 @@ public class GameActivity extends AppCompatActivity implements ObviousSetup {
     private Button btn;
     private int maxWidth, maxHeight, reactionNumber;
     private ConstraintLayout layout;
+    @SuppressLint("StaticFieldLeak")
     public static ImageView iv_react;
     public static Intent intentForRunnable;
     private List<Integer> listR;
-    private ArrayList<String> s;
+    public List<Integer> listB;
     private ArrayList<GamePosition> positions;
     private DatabaseReference firebaseReference;
+    private boolean two = false, three = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         loadAll();
+        Log.i("MyLog","Done");
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        reactionNumber = 0;
+    }
 
     public void loadAll() {
         setViews();
@@ -64,6 +73,7 @@ public class GameActivity extends AppCompatActivity implements ObviousSetup {
 
     public void setDeclarations() {
         listR = new ArrayList<>();
+        listB = new ArrayList<>();
         handler = new Handler();
         firebaseReference = FirebaseDatabase.getInstance().getReference().child("players").child(getIntent().getStringExtra("child")).child("reactions");
         reactionNumber = 0;
@@ -76,7 +86,7 @@ public class GameActivity extends AppCompatActivity implements ObviousSetup {
             handler.postDelayed(gameRunnable, 3000);
             btn.setVisibility(GONE);
             timerForReaction = SystemClock.uptimeMillis();
-            layout.setBackgroundResource(R.drawable.background_game);
+            layout.setBackgroundResource(R.drawable.bg_one);
             findViewById(R.id.tv_activity_game_desc).setVisibility(GONE);
         });
 
@@ -87,20 +97,40 @@ public class GameActivity extends AppCompatActivity implements ObviousSetup {
                 Log.i("MyLog", "Time Reacted : " + timeReacted);
                 Log.i("MyLog", "Average score: " + calculateScore(listR));
                 recordReaction(firebaseReference, iv_react.getX(), iv_react.getY(), timeReacted);
+                reactionNumber++;
             } else {
-                recordReaction(firebaseReference, iv_react.getX(), iv_react.getY(), 2000L);
+                listB.add(2000);
             }
-            reactionNumber++;
+
+            swapBg();
         });
 
         layout.setOnClickListener(v -> iv_react.performClick());
     }
 
-    private void recordReaction(DatabaseReference FBPlayerReference, Float x, Float y, Long time) {
+    public void swapBg(){
+        if (positions.size() < 24 && positions.size() >= 12 && !two) {
+            layout.setBackgroundResource(R.drawable.bg_two);
+            two = true;
+        }
+        if(positions.size() < 12 && !three) {
+            three = !three;
+            layout.setBackgroundResource(R.drawable.bg_three);
+        }
+    }
+
+    public void recordReaction(DatabaseReference FBPlayerReference, Float x, Float y, Long time) {
         listR.add(time.intValue());
+        listB.add(time.intValue());
         FBPlayerReference.child(String.valueOf(reactionNumber)).child("x").setValue(x);
         FBPlayerReference.child(String.valueOf(reactionNumber)).child("y").setValue(y);
         FBPlayerReference.child(String.valueOf(reactionNumber)).child("time").setValue(time);
+    }
+
+    public void recordReaction(DatabaseReference FBPlayerReference, Float x, Float y) {
+        FBPlayerReference.child(String.valueOf(reactionNumber)).child("x").setValue(x);
+        FBPlayerReference.child(String.valueOf(reactionNumber)).child("y").setValue(y);
+        FBPlayerReference.child(String.valueOf(reactionNumber)).child("time").setValue(-1);
     }
 
     private Long calculateScore(List<Integer> score) {
@@ -110,21 +140,16 @@ public class GameActivity extends AppCompatActivity implements ObviousSetup {
     private void createPositions() {
         positions = new ArrayList<>();
 
-        for (int y = 5; y <= 95; y += 30) {
-            for (int x = 5; x <= 95; x += 30) {
-                positions.add(new GamePosition((maxWidth / 100) * x, (maxHeight / 100) * y));
-
-            }
-            positions.add(new GamePosition(
-                    new Random().nextInt(maxWidth) >= maxWidth - iv_react.getWidth() ? maxWidth - iv_react.getWidth() : new Random().nextInt(maxWidth),
-                    new Random().nextInt(maxHeight) >= maxHeight - iv_react.getHeight() ? maxHeight - iv_react.getHeight() : new Random().nextInt(maxHeight)
-            ));
+        while(positions.size() < 36){
+            int x = new Random().nextInt(maxWidth);
+            int y = new Random().nextInt(maxHeight);
+            x = (x >= (maxWidth - (maxWidth * 0.03))) ? (maxWidth - (int)(maxWidth * 0.03)) : x;
+            y = (y >= (maxHeight - (maxHeight * 0.03))) ? (maxHeight - (int)(maxHeight *0.03)) : y;
+            Log.i("MyLog","Max W H " + x + " " + y);
+            positions.add(new GamePosition(x,y));
+            Log.i("MyLog", "Size of positions list" + positions.size());
+//            positions.add(new GamePosition(new Random().nextInt(maxWidth),new Random().nextInt(maxHeight)));
         }
-        Log.i("MyLog", "Size of positions list" + positions.size());
-        positions = new ArrayList<>();
-        positions.add(new GamePosition(45, 65));
-        positions.add(new GamePosition(453, 653));
-        positions.add(new GamePosition(245, 265));
     }
 
     public Runnable gameRunnable = new Runnable() {
@@ -135,6 +160,12 @@ public class GameActivity extends AppCompatActivity implements ObviousSetup {
                 int index = new Random().nextInt(positions.size());
                 GamePosition pos = positions.get(index);
                 positions.remove(index);
+                swapBg();
+                if (positions.size() != (35-listR.size())) {
+                    recordReaction(firebaseReference, iv_react.getX(),iv_react.getY());
+                    listR.add(calculateScore(listR).intValue());
+                    reactionNumber++;
+                }
                 iv_react.setX(pos.getX());
                 iv_react.setY(pos.getY());
                 iv_react.setVisibility(View.VISIBLE);
@@ -146,8 +177,8 @@ public class GameActivity extends AppCompatActivity implements ObviousSetup {
                 Intent i = new Intent(GameActivity.this, EndGameActivity.class);
                 String nick = intentForRunnable.getStringExtra("child");
                 FirebaseDatabase.getInstance().getReference().child("players")
-                        .child(nick).child("score").setValue(calculateScore(listR));
-                i.putExtra("score", String.valueOf(calculateScore(listR)));
+                        .child(nick).child("score").setValue(calculateScore(listB));
+                i.putExtra("score", String.valueOf(calculateScore(listB)));
                 i.putExtra("nick", nick);
                 startActivity(i);
                 GameActivity.this.finish();
@@ -168,7 +199,7 @@ public class GameActivity extends AppCompatActivity implements ObviousSetup {
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        maxWidth = size.x;
-        maxHeight = size.y;
+        maxWidth = size.x - 40;
+        maxHeight = size.y - 60;
     }
 }

@@ -79,8 +79,9 @@ public class HighscoresActivity extends AppCompatActivity implements ObviousSetu
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 if (dataSnapshot.getValue() != null){
                     Player player = dataSnapshot.getValue(Player.class);
-                    playerData.add(player);
-
+                    if (player.getScore() != null){
+                        playerData.add(player);
+                    }
                     adapter.notifyDataSetChanged();
                 }
             }

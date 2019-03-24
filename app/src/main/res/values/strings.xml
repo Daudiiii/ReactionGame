@@ -2,9 +2,13 @@
     <string name="app_name">Reaction Game</string>
     <string name="introDesc">Tento obrazok sa bude objavovat nahodne po obrazovke, reagujte na nho
                              tuknutim po obrazovke alebo zatraste telefonom, v pripade ze klikate pocas toho, ako je objekt neviditelny, pripisuje sa vam bonusova reakcia v hodnote 2000 ms, cize vase skore bude v priemere vacsie, resp. horsie</string>
-    <string name="introDescription">Na obrazovke sa bude zobrazovat objekt \n
-                                    Reagujte na nho dotykom po obrazovke/na objekt alebo zatrasenim telefonu \n
-                                    V pripade reakcie ked je objekt neviditelny sa zarataju 2 sekundy do vasho skore \n
-                                    Cim mensie skore je, tym lepsie
+    <string name="introDescription">
+        Reagujte na objekt dotykom ľubovoľne po obrazovke\n ktorý sa bude zobrazovať náhodne po displeji\n
+        Keď zareagujete počas jeho neviditeľnosti \n +2000 ms k score, čím menšie je skóre tým lepšie :)\n
+    </string>
+    <string name="gdpr">
+        Aplikácia slúži na zber dát o reakciách používateľov na rôzne časti obrazovky, dáta budú 
+        použité na analytické účely pre bakalársku prácu. Aby boli dáta anonymné, zvoľte si nickname ľubovoľne kombináciou
+        písmena + čísla, písmena + znaky, písmená + čísla + znaky.
     </string>
 </resources>
